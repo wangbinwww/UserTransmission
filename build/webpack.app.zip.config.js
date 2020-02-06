@@ -10,7 +10,7 @@ module.exports = {
     mode: 'development', // 开发模式
     //devtool: "source-map", // 开启调试
     entry: {
-        main: path.resolve(__dirname, '../src/app.js'), // 入口文件
+        main: path.resolve(__dirname, '../src/GLP-UT.js'), // 入口文件
     },
     output: {
         filename: "[name].[hash:2].js", // 打包后的文件名称

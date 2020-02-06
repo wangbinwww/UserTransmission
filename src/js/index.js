@@ -5,7 +5,7 @@
 /* 引入net模块 */
 var net = require("net");
 const log4js = require("log4js");
-var num = 0;
+//var num = 0;
 var LogOnOff = true;
 log4js.configure({
   appenders: {
