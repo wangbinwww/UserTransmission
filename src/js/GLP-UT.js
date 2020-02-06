@@ -42,6 +42,7 @@ var server = net.createServer(function (socket) {
       //console.log(SendMessage);
       if (LogOnOff == true) {
         var Message = "接收到sum校验正确报文:" + RecvData.toString('hex');
+        logger.debug(Message);
         console.log(Message);
         /* 发送数据 */
         var SendMessage = MessagePKG(RecvData);
