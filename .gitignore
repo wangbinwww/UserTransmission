@@ -1,5 +1,7 @@
 git add README.md.DS_Store
 node_modules
+logs
+/logs
 /dist
 
 # local env files
