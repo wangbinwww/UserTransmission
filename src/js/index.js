@@ -40,14 +40,14 @@ var server = net.createServer(function (socket) {
     if (SumCRC == true) {
       //console.log(SendMessage);
       if (LogOnOff == true) {
-        var Message = "接收到sum校验正确报文:" + RecvData.toString('hex');
+        var Message = "接收到SUM校验正确报文:" + RecvData.toString('hex');
         logger.debug(Message);
         console.log(Message);
-        console.log("校验正确!");
+        //console.log("校验正确!");
         /* 发送数据 */
         var SendMessage = MessagePKG(RecvData);
         socket.write(SendMessage, function () {
-          var Message = "发送应答报文:" + SendMessage.toString('hex');
+          var Message = "--------发送应答报文:" + SendMessage.toString('hex');
           logger.debug(Message);
           console.log(Message);
         });
@@ -55,7 +55,7 @@ var server = net.createServer(function (socket) {
     } else {
       //var SendMessage = CRCcalculate();
       if (LogOnOff == true) {
-        var Message = "接收到sum校验错误的报文: " + RecvData.toString('hex');
+        var Message = "接收到SUM校验错误的报文: " + RecvData.toString('hex');
         logger.debug(Message);
         console.log(Message);
       }
