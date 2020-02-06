@@ -27,8 +27,9 @@ const logger = log4js.getLogger("everything");
 /* 创建TCP服务器 */
 var server = net.createServer(function (socket) {
   server.getConnections(function (err, count) {
-    console.log("客户机上线 ON Line!");
-    console.log("客户端在线数量是： " + count);
+    logger.debug("设备上线 ON Line!");
+    console.log("设备上线 ON Line!");
+    console.log("设备在线数量是： " + count);
   });
   /* 监听data事件 */
   socket.on("data", function (RecvData) {
@@ -37,13 +38,12 @@ var server = net.createServer(function (socket) {
     var SumCRC = CRCcheckout(RecvData);
     //console.log(num++ + " Recv:" + RecvData.toString());
     if (SumCRC == true) {
-      console.log("校验正确!");
-
       //console.log(SendMessage);
       if (LogOnOff == true) {
         var Message = "接收到sum校验正确报文:" + RecvData.toString('hex');
         logger.debug(Message);
         console.log(Message);
+        console.log("校验正确!");
         /* 发送数据 */
         var SendMessage = MessagePKG(RecvData);
         socket.write(SendMessage, function () {
@@ -64,6 +64,7 @@ var server = net.createServer(function (socket) {
     }
   });
   socket.on("close", function () {
+    logger.debug("设备下线 OFF Line！ ");
     console.log("close事件--客户机下线 OFF Line！ ");
   });
   socket.on("error", function (err) {
@@ -73,6 +74,7 @@ var server = net.createServer(function (socket) {
 
 /* 设置连接的服务器 */
 server.listen(5001, function () {
+  logger.debug("程序启动:创建本机TCP Server 监听端口5001!");
   console.log("创建本机TCP Server 监听端口5001!");
 });
 /* 允许的最大连接数量*/
@@ -87,7 +89,7 @@ function CRCcheckout(RecvData) {
   var buf = Buffer.from(RecvData);
   //接收报文中的累加和校验值
   var RecvSum = buf[buf.length - 3];
-  console.log('收到字节长度: ' + buf.length);
+  //console.log('收到字节长度: ' + buf.length);
   for (var i = 2; i < (buf.length - 3); i++) {
     CalSum = CalSum + buf[i];
   }
