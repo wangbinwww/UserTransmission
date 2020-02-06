@@ -12,7 +12,7 @@ module.exports = {
         main: path.resolve(__dirname, '../src/js/index.js'), // 入口文件
     },
     output: {
-        filename: "[name].[hash:2].js", // 打包后的文件名称
+        filename: "[name].[hash:8].js", // 打包后的文件名称
         path: path.resolve(__dirname, "../dist/"), // 打包后的目录
     },
     target: "node",
