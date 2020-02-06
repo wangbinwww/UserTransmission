@@ -47,7 +47,7 @@ var server = net.createServer(function (socket) {
         /* 发送数据 */
         var SendMessage = MessagePKG(RecvData);
         socket.write(SendMessage, function () {
-          var Message = "--------发送应答报文:" + SendMessage.toString('hex');
+          var Message = "---------发送应答报文:" + SendMessage.toString('hex');
           logger.debug(Message);
           console.log(Message);
         });
