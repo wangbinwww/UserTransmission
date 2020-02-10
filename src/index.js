@@ -41,9 +41,11 @@ var server = net.createServer(function (socket) {
       //console.log(SendMessage);
       if (LogOnOff == true) {
         var Message = "接收到SUM校验正确报文:" + RecvData.toString('hex');
-
         logger.debug(Message);
         console.log(Message);
+        var s = JSON.stringify(MessageAnalysis(RecvData), null, ' ');
+        console.log('解析数据:' + s);
+        logger.debug('解析数据:' + sMessage);
         //console.log("校验正确!");
         /* 发送数据 */
         var SendMessage = MessagePKG(RecvData);
@@ -52,6 +54,7 @@ var server = net.createServer(function (socket) {
           logger.debug(Message);
           console.log(Message);
         });
+
       }
     } else {
       //var SendMessage = CRCcalculate();
@@ -106,8 +109,6 @@ function CRCcheckout(RecvData) {
 }
 
 function MessagePKG(RecvData) {
-
-
   //接收buf
   const MessageBody = Buffer.from(RecvData);
   const Message = Buffer.alloc(24);
@@ -126,19 +127,14 @@ function MessagePKG(RecvData) {
   // console.log(buf2);
   // console.log(buf3);
   return pubMessage //SendMessage
-
-
 }
 //计算累加和校验
 function SumCRC(SumData) {
   //console.log(RecvData);
   //计算得到的sum用于校验
   var CalSum = 0;
-
   //接收buf
   var buf = Buffer.from(SumData);
-  //接收报文中的累加和校验值
-  var RecvSum = buf[buf.length - 3];
   //console.log('收到用于校验字节长度: ' + buf.length);
   for (var i = 2; i < (buf.length); i++) {
     CalSum = CalSum + buf[i];
@@ -149,21 +145,72 @@ function SumCRC(SumData) {
 
 }
 
-function Messageanalysis(RecvData) {
-
-
+function MessageAnalysis(RecvData) {
+  //定义解析信息
+  var RecvMessage = {};
   //接收buf
   let MessageBody = Buffer.from(RecvData);
   //启动符号
-  let StartCode = Buffer.from(RecvData[0], RecvData[1])
+  //4040
+  let ACode = Buffer.from([RecvData[0], RecvData[1]])
   //控制单元
   //业务流水号 2 字节
+  let B1Code = Buffer.from([RecvData[2], RecvData[3]])
+  //协议版本号
+  let B2Code = Buffer.from([RecvData[4], RecvData[5]])
+  //时间标签6字节
+  let TDataTime = "20" + RecvData[11].toString(10) + "年" + RecvData[10].toString(10) + "月" + RecvData[9].toString(10) + "日" + RecvData[8].toString(10) + "时" + RecvData[7].toString(6) + "分" + RecvData[6].toString(10) + "秒"
+  let B3Code = Buffer.from(TDataTime)
+  //原地址6字节
+  let B4Code = Buffer.from([RecvData[17], RecvData[16], RecvData[15], RecvData[14], RecvData[13], RecvData[12]])
+  //目的地址6字节
+  let B5Code = Buffer.from([RecvData[23], RecvData[22], RecvData[21], RecvData[20], RecvData[19], RecvData[18]])
+  //应用数据单元长度2字节
+  let B6Code = Buffer.from([RecvData[25], RecvData[24]])
+  //命令控制字1字节
+  let B7Code = Buffer.from([RecvData[26]])
+  //应用数据单元<1024字节
+  //1C010C1C0A0D0114
+  //类型标志1字节
+  let C1Code = Buffer.from([RecvData[27]])
+  //信息对象数目1字节
+  let C2Code = Buffer.from([RecvData[28]])
+  //信息对象1—-4字节
+  //系统类型标志1字节
+  if (C1Code[0] == [0x1c]) {
+    //0x1c=28=上传用户信息装置系统时间
+    let mess = "上传用户信息装置系统时间"
+    var C1CodeCN = Buffer.from(mess)
+    let CDataTime = "20" + RecvData[34].toString(10) + "年" + RecvData[33].toString(10) + "月" + RecvData[32].toString(10) + "日" + RecvData[31].toString(10) + "时" + RecvData[30].toString(6) + "分" + RecvData[29].toString(10) + "秒"
+    var C3Code = Buffer.from(CDataTime)
+  }
+  //校验和1字节
+  let ECode = Buffer.from([RecvData[RecvData.length - 3]])
+  //结束符2字节
+  let FCode = Buffer.from([RecvData[RecvData.length - 2], RecvData[RecvData.length - 1]])
 
-  let pubMessage = Buffer.concat([Message, MessageControl, MessageCRC, MessageEnd])
+  //信息对象建立
+  RecvMessage.启动符 = ACode.toString('utf8');
+  RecvMessage.业务流水号 = B1Code.toString('hex');
+  RecvMessage.协议版本号 = B2Code.toString('hex');
+  RecvMessage.时间标签 = B3Code.toString('utf8');
+  RecvMessage.原地址 = B4Code.toString('hex');
+  RecvMessage.目的地址 = B5Code.toString('hex');
+  RecvMessage.应用数据单元长度 = B6Code.toString('hex');
+  RecvMessage.命令控制字 = B7Code.toString('hex');
+  if (C1Code[0] == [0x1c]) {
+    RecvMessage.类型标志 = C1CodeCN.toString('utf8');
+    RecvMessage.信息对象数目 = C2Code.toString('hex');
+    RecvMessage.信息对象1 = C3Code.toString('utf8');
+  }
+  RecvMessage.校验和 = ECode.toString('hex');
+  RecvMessage.结束符 = FCode.toString('utf8');
+
+
   //console.log('5=' + pubMessage.toString('hex'));
   // console.log(buf2);
   // console.log(buf3);
-  return pubMessage //SendMessage
+  return RecvMessage //
 
 
 }
