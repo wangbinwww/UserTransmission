@@ -41,6 +41,7 @@ var server = net.createServer(function (socket) {
       //console.log(SendMessage);
       if (LogOnOff == true) {
         var Message = "接收到SUM校验正确报文:" + RecvData.toString('hex');
+
         logger.debug(Message);
         console.log(Message);
         //console.log("校验正确!");
@@ -145,5 +146,24 @@ function SumCRC(SumData) {
   CalSum = CalSum & 255;
   var send = Buffer.from([CalSum])
   return send;
+
+}
+
+function Messageanalysis(RecvData) {
+
+
+  //接收buf
+  let MessageBody = Buffer.from(RecvData);
+  //启动符号
+  let StartCode = Buffer.from(RecvData[0], RecvData[1])
+  //控制单元
+  //业务流水号 2 字节
+
+  let pubMessage = Buffer.concat([Message, MessageControl, MessageCRC, MessageEnd])
+  //console.log('5=' + pubMessage.toString('hex'));
+  // console.log(buf2);
+  // console.log(buf3);
+  return pubMessage //SendMessage
+
 
 }
