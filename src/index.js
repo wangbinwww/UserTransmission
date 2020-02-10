@@ -35,7 +35,7 @@ var server = net.createServer(function (socket) {
   socket.on("data", function (RecvData) {
 
     // sum校验
-    var SumCRC = CRCcheckout(RecvData);
+    var SumCRC = CRCCheckOut(RecvData);
     //console.log(num++ + " Recv:" + RecvData.toString());
     if (SumCRC == true) {
       //console.log(SendMessage);
@@ -45,7 +45,7 @@ var server = net.createServer(function (socket) {
         console.log(Message);
         var s = JSON.stringify(MessageAnalysis(RecvData), null, ' ');
         console.log('解析数据:' + s);
-        logger.debug('解析数据:' + sMessage);
+        logger.debug('解析数据:' + s);
         //console.log("校验正确!");
         /* 发送数据 */
         var SendMessage = MessagePKG(RecvData);
@@ -57,7 +57,7 @@ var server = net.createServer(function (socket) {
 
       }
     } else {
-      //var SendMessage = CRCcalculate();
+      //var SendMessage = CRCCalculate();
       if (LogOnOff == true) {
         var Message = "接收到SUM校验错误的报文: " + RecvData.toString('hex');
         logger.debug(Message);
@@ -85,7 +85,10 @@ server.listen(5001, function () {
 server.maxConnections = 3;
 //计算收到数据的 sum累加和 校验
 
-function CRCcheckout(RecvData) {
+function CRCCheckOut(RecvData) {
+  if (RecvData.length < 17) {
+    return false;
+  }
   //console.log(RecvData);
   //计算得到的sum用于校验
   var CalSum = 0;
