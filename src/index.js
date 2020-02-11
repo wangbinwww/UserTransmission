@@ -149,8 +149,7 @@ function SumCRC(SumData) {
 }
 
 function MessageAnalysis(RecvData) {
-  //定义解析信息
-  var RecvMessage = {};
+
   //接收buf
   let MessageBody = Buffer.from(RecvData);
   //启动符号
@@ -193,6 +192,7 @@ function MessageAnalysis(RecvData) {
   let FCode = Buffer.from([RecvData[RecvData.length - 2], RecvData[RecvData.length - 1]])
 
   //信息对象建立
+  var RecvMessage = {};
   RecvMessage.启动符 = ACode.toString('utf8');
   RecvMessage.业务流水号 = B1Code.toString('hex');
   RecvMessage.协议版本号 = B2Code.toString('hex');

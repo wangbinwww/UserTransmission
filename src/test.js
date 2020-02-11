@@ -1,79 +1,30 @@
-//数据体
-var DataJson = '{"persons":[{"id":"1","name":"山姆","age":"23"},{"id":"2","name":"比尔","age":"23"}]}';
+var arr = []
+arr[0] = "George"
+arr[1] = "John"
+arr[2] = "Thomas"
+arr[3] = "James"
+arr[4] = "Adrew"
+arr[5] = "Martin"
+console.log(arr.sort())
 
-var person = {
-    "id": "1",
-    "name": "山姆",
-    "age": "23"
-}
-var persons = {
-    "persons": [{
-        "id": "1",
-        "name": "山姆",
-        "age": "23"
-    }, {
-        "id": "2",
-        "name": "比尔",
-        "age": "23"
-    }]
-}
+//var arr = []
+arr[0] = "10"
+arr[1] = "5"
+arr[2] = "40"
+arr[3] = "25"
+arr[4] = "1000"
+arr[5] = "1"
+console.log(arr.sort())
 
-//获取JSON中的值,直接获取或遍历
+//var arr = []
+arr[0] = "10"
+arr[1] = "5"
+arr[2] = "40"
+arr[3] = "25"
+arr[4] = "1000"
+arr[5] = "1"
+console.log(arr.sort(sortNumber))
 
-//基本格式
-var person = {
-    "name": "张八",
-    "age": 23,
-    "gender": true
+function sortNumber(a, b) {
+    return a - b
 }
-//遍历
-for (var key in person) {
-    //获取键和值 key为字符串格式
-    console.log(key + ":" + person[key]);
-}
-//数组格式
-var ps = [{
-    "name": "张三",
-    "age": 23,
-    "gender": true
-}, {
-    "name": "李四",
-    "age": 24,
-    "gender": true
-}, {
-    "name": "王五",
-    "age": 25,
-    "gender": false
-}]
-//遍历
-for (var i = 0; i < ps.length; i++) {
-    var p = ps[i];
-    for (var key in p) {
-        console.log(key + ":" + p[key]);
-    }
-}
-//嵌套格式
-var persons = {
-    "persons": [{
-            "name": "张三",
-            "age": 23,
-            "gender": true
-        },
-        {
-            "name": "李四",
-            "age": 24,
-            "gender": true
-        },
-        {
-            "name": "王五",
-            "age": 25,
-            "gender": false
-        }
-    ]
-};
-//获取王五的值
-var name = persons.persons[2].name
-console.log('name' + "=" + name);
-
-persons.persons[3] = person
-console.log(persons.persons);
