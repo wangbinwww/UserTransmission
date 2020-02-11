@@ -114,8 +114,8 @@ function CRCCheckOut(RecvData) {
 function MessagePKG(RecvData) {
   //接收buf
   const MessageBody = Buffer.from(RecvData);
-  const Message = Buffer.alloc(24);
-  MessageBody.copy(Message, 0, 0, 24);
+  const Message = Buffer.alloc(26);
+  MessageBody.copy(Message, 0, 0, 26);
   //console.log('1=' + Message.toString('hex'));
   const MessageControl = Buffer.from([0x03]);
   //console.log('2=' + MessageControl.toString('hex'));
