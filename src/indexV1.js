@@ -123,7 +123,6 @@ function MessagePKG(RecvData) {
   const SendMessage = Buffer.concat([Message, MessageControl])
   //console.log('3=' + SendMessage.toString('hex'));
   const MessageCRC = SumCRC(SendMessage);
-
   //console.log('4=' + MessageCRC.toString('hex'));
   const MessageEnd = Buffer.from([0x23, 0x23]);
   //console.log('5=' + MessageEnd.toString('hex'));
@@ -153,7 +152,7 @@ function SumCRC(SumData) {
 function MessageAnalysis(RecvData) {
 
   //接收buf
-  //let MessageBody = Buffer.from(RecvData);
+  let MessageBody = Buffer.from(RecvData);
   //启动符号
   //4040
   let ACode = Buffer.from([RecvData[0], RecvData[1]])
@@ -176,42 +175,34 @@ function MessageAnalysis(RecvData) {
   //应用数据单元<1024字节
   //类型标志1字节
   let C1Code = Buffer.from([RecvData[27]])
-  var C1CodeCN = MarkType(C1Code[0])
   //信息对象数目1字节
   let C2Code = Buffer.from([RecvData[28]])
+  //系统类型标志1字节
   if (C1Code[0] == [0x1c]) {
     //0x1c=28=上传用户信息装置系统时间
+    let mess = "上传用户信息装置系统时间"
+    var C1CodeCN = Buffer.from(mess)
     let CDataTime = "20" + RecvData[34].toString(10) + "年" + RecvData[33].toString(10) + "月" + RecvData[32].toString(10) + "日" + RecvData[31].toString(10) + "时" + RecvData[30].toString(10) + "分" + RecvData[29].toString(10) + "秒"
     var C3Code = Buffer.from(CDataTime)
   }
   if (C1Code[0] == [0x02]) {
-    //0x02=上传用户信息装置系统时间
-    //const MessageBody = Buffer.from(RecvData);
-    //const Message = Buffer.alloc(40);
-    //MessageBody.copy(Message, 0, 29, 40);
-    var C4Code = Buffer.from([RecvData[29]])
-    var C4CodeCN = SystemType(C4Code[0])
-    var C5Code = Buffer.from([RecvData[30]])
-    var C6Code = Buffer.from([RecvData[31]])
-    var C6CodeCN = PartType(C6Code[0])
-    let ParAdd = RecvData[34].toString(10) + RecvData[32].toString(10)
-    if (ParAdd.length < 6) {
-      ParAdd = '0' + ParAdd;
-    }
-    if (ParAdd.length < 5) {
-      ParAdd = '00' + ParAdd;
-    }
-    if (ParAdd.length < 4) {
-      ParAdd = '000' + ParAdd;
-    }
-    if (ParAdd.length < 3) {
-      ParAdd = '000' + ParAdd;
-    }
-    var C7CodeCN = Buffer.from(ParAdd)
-    var C8Code = Buffer.from([RecvData[36]])
-    var C8CodeCN = Buffer.from(PartTypeClass(C8Code[0]))
-    var C9Code = Buffer.alloc(30);
-    RecvData.copy(C9Code, 0, 38, 68);
+    //0x1c=28=上传用户信息装置系统时间
+    let mess1 = "上传建筑消防设施部件运行状态";
+    var C1CodeCN = Buffer.from(mess1)
+    const MessageBody = Buffer.from(RecvData);
+    const Message = Buffer.alloc(40);
+    MessageBody.copy(Message, 0, 29, 40);
+    let mess2 = '';
+    var C3CodeCN = Buffer.from(mess2);
+    var C4Code = Buffer.from([RecvData[28]])
+
+
+
+    var C5Code = Buffer.from([RecvData[28]])
+    var C6Code = Buffer.from([RecvData[28]])
+    var C7Code = Buffer.from([RecvData[28]])
+
+
   }
   //校验和1字节
   let ECode = Buffer.from([RecvData[RecvData.length - 3]])
@@ -227,19 +218,20 @@ function MessageAnalysis(RecvData) {
   RecvMessage.目的地址 = B5Code.toString('hex');
   RecvMessage.应用数据单元长度 = B6Code.toString('hex');
   RecvMessage.命令控制字 = B7Code.toString('hex');
-  RecvMessage.类型标志 = C1CodeCN;
-  RecvMessage.信息对象数目 = C2Code.toString('hex');
-
   if (C1Code[0] == [0x1c]) {
-    RecvMessage.信息内容 = C3Code.toString('utf8');
+    RecvMessage.类型标志 = C1CodeCN.toString('utf8');
+    RecvMessage.信息对象数目 = C2Code.toString('hex');
+    RecvMessage.信息对象 = C3CodeCN.toString('utf8');
   };
   if (C1Code[0] == [0x02]) {
-    RecvMessage.系统类型标志 = C4CodeCN.toString('utf8');
-    RecvMessage.系统地址 = C5Code.toString('hex');
-    RecvMessage.部件类型 = C6CodeCN.toString('utf8');
-    RecvMessage.部件地址 = C7CodeCN.toString('utf8');
-    RecvMessage.部件状态 = C8CodeCN.toString('utf8');
-    RecvMessage.部件说明 = C9Code.toString('hex');
+    RecvMessage.类型标志 = C1CodeCN.toString('utf8');
+    RecvMessage.信息对象数目 = C2Code.toString('hex');
+    RecvMessage.系统类型标志 = C3Code.toString('utf8');
+    RecvMessage.系统地址 = C4Code.toString('hex');
+    RecvMessage.部件类型 = C5Code.toString('hex');
+    RecvMessage.部件地址 = C6Code.toString('hex');
+    RecvMessage.部件状态 = C7Code.toString('hex');
+
   };
 
   RecvMessage.校验和 = ECode.toString('hex');
@@ -506,37 +498,4 @@ function MarkType(num) {
     '查岗命令',
   ]
   return (Type[num])
-}
-
-//图7 建筑消防设施部件状态数据结构
-function PartTypeClass(num) {
-
-  if (num == 01) {
-    return '正常运行状态';
-  }
-  if (num == 02) {
-    return '火警';
-  }
-  if (num == 04) {
-    return '故障';
-  }
-  if (num == 08) {
-    return '屏蔽';
-  }
-  if (num == 16) {
-    return '监管';
-  }
-  if (num == 32) {
-    return '启动（开启）';
-  }
-  if (num == 64) {
-    return '反馈';
-  }
-  if (num == 128) {
-    return '延时状态';
-  }
-  if (num == 256) {
-    return '电源故障';
-  }
-  return '无';
 }
