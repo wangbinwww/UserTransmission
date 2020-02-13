@@ -43,14 +43,9 @@ var server = net.createServer(function (socket) {
         var Message = "接收到SUM校验正确报文:" + RecvData.toString('hex');
         logger.debug(Message);
         console.log(Message);
-        let C2CodeLoop = Buffer.from([RecvData[28]])
-        for (var i = 0; i < C2CodeLoop[0]; i++) {
-          var OffsetLoop = i * 46 + 29;
-          //console.log(OffsetLoop);
-          var s = JSON.stringify(MessageAnalysis(RecvData, OffsetLoop), null, ' ');
-          console.log('解析数据:' + s);
-          logger.debug('解析数据:' + s);
-        }
+        var s = JSON.stringify(MessageAnalysis(RecvData), null, ' ');
+        console.log('解析数据:' + s);
+        logger.debug('解析数据:' + s);
         //console.log("校验正确!");
         /* 发送数据 */
         var SendMessage = MessagePKG(RecvData);
@@ -155,8 +150,10 @@ function SumCRC(SumData) {
 
 }
 
-function MessageAnalysis(RecvData, LoopNum) {
+function MessageAnalysis(RecvData) {
 
+  //接收buf
+  //let MessageBody = Buffer.from(RecvData);
   //启动符号
   //4040
   let ACode = Buffer.from([RecvData[0], RecvData[1]])
@@ -188,14 +185,16 @@ function MessageAnalysis(RecvData, LoopNum) {
     var C3Code = Buffer.from(CDataTime)
   }
   if (C1Code[0] == [0x02]) {
-    //0x02=上传建筑消防设施部件运行状态
-
-    var C4Code = Buffer.from([RecvData[LoopNum]])
+    //0x02=上传用户信息装置系统时间
+    //const MessageBody = Buffer.from(RecvData);
+    //const Message = Buffer.alloc(40);
+    //MessageBody.copy(Message, 0, 29, 40);
+    var C4Code = Buffer.from([RecvData[29]])
     var C4CodeCN = SystemType(C4Code[0])
-    var C5Code = Buffer.from([RecvData[LoopNum + 1]])
-    var C6Code = Buffer.from([RecvData[LoopNum + 2]])
+    var C5Code = Buffer.from([RecvData[30]])
+    var C6Code = Buffer.from([RecvData[31]])
     var C6CodeCN = PartType(C6Code[0])
-    let ParAdd = RecvData[LoopNum + 5].toString(10) + RecvData[LoopNum + 3].toString(10)
+    let ParAdd = RecvData[34].toString(10) + RecvData[32].toString(10)
     if (ParAdd.length < 6) {
       ParAdd = '0' + ParAdd;
     }
@@ -209,10 +208,10 @@ function MessageAnalysis(RecvData, LoopNum) {
       ParAdd = '000' + ParAdd;
     }
     var C7CodeCN = Buffer.from(ParAdd)
-    var C8Code = Buffer.from([RecvData[LoopNum + 7]])
+    var C8Code = Buffer.from([RecvData[36]])
     var C8CodeCN = Buffer.from(PartTypeClass(C8Code[0]))
     var C9Code = Buffer.alloc(30);
-    RecvData.copy(C9Code, 0, LoopNum + 9, LoopNum + 39);
+    RecvData.copy(C9Code, 0, 38, 68);
   }
   //校验和1字节
   let ECode = Buffer.from([RecvData[RecvData.length - 3]])
