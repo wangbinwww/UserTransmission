@@ -182,6 +182,14 @@ function MessageAnalysis(RecvData, LoopNum) {
   var C1CodeCN = MarkType(C1Code[0])
   //信息对象数目1字节
   let C2Code = Buffer.from([RecvData[28]])
+
+  if (C1Code[0] == [0x15]) {
+    //上传用户信息传输装置运行状态
+    var C8Code = Buffer.from([RecvData[29]])
+    var C8CodeCN = Buffer.from(SystemTypeClass(C8Code[0]))
+
+  }
+
   if (C1Code[0] == [0x1c]) {
     //0x1c=28=上传用户信息装置系统时间
     let CDataTime = "20" + RecvData[34].toString(10) + "年" + RecvData[33].toString(10) + "月" + RecvData[32].toString(10) + "日" + RecvData[31].toString(10) + "时" + RecvData[30].toString(10) + "分" + RecvData[29].toString(10) + "秒"
@@ -231,6 +239,9 @@ function MessageAnalysis(RecvData, LoopNum) {
   RecvMessage.类型标志 = C1CodeCN;
   RecvMessage.信息对象数目 = C2Code.toString('hex');
 
+  if (C1Code[0] == [0x15]) {
+    RecvMessage.信息内容 = C8CodeCN.toString('utf8');
+  }
   if (C1Code[0] == [0x1c]) {
     RecvMessage.信息内容 = C3Code.toString('utf8');
   };
@@ -538,6 +549,32 @@ function PartTypeClass(num) {
   }
   if (num == 256) {
     return '电源故障';
+  }
+  return '无';
+}
+
+function SystemTypeClass(num) {
+
+  if (num == 01) {
+    return '正常监视状态';
+  }
+  if (num == 02) {
+    return '火警';
+  }
+  if (num == 04) {
+    return '故障';
+  }
+  if (num == 08) {
+    return '主电故障';
+  }
+  if (num == 16) {
+    return '备电故障';
+  }
+  if (num == 32) {
+    return '与监控中心通信故障';
+  }
+  if (num == 64) {
+    return '监测链接线路故障';
   }
   return '无';
 }
