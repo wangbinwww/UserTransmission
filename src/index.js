@@ -3,10 +3,10 @@
     适用于三山消防系统用传装置数据解析
 */
 /* 引入net模块 */
-var net = require("net");
+let net = require("net");
 const log4js = require("log4js");
 //var num = 0;
-var LogOnOff = true;
+let LogOnOff = true;
 log4js.configure({
   appenders: {
     everything: {
@@ -25,7 +25,7 @@ log4js.configure({
 });
 const logger = log4js.getLogger("everything");
 /* 创建TCP服务器 */
-var server = net.createServer(function (socket) {
+let server = net.createServer(function (socket) {
   server.getConnections(function (err, count) {
     logger.debug("设备上线 ON Line!");
     console.log("设备上线 ON Line!");
@@ -35,36 +35,36 @@ var server = net.createServer(function (socket) {
   socket.on("data", function (RecvData) {
 
     // sum校验
-    var SumCRC = CRCCheckOut(RecvData);
+    let SumCRC = CRCCheckOut(RecvData);
     //console.log(num++ + " Recv:" + RecvData.toString());
     if (SumCRC == true) {
       //console.log(SendMessage);
       if (LogOnOff == true) {
-        var Message = "接收到SUM校验正确报文:" + RecvData.toString('hex');
+        let Message = "接收到SUM校验正确报文:" + RecvData.toString('hex');
         logger.debug(Message);
         console.log(Message);
         let C2CodeLoop = Buffer.from([RecvData[28]])
-        for (var i = 0; i < C2CodeLoop[0]; i++) {
-          var OffsetLoop = i * 46 + 29;
+        for (let i = 0; i < C2CodeLoop[0]; i++) {
+          let OffsetLoop = i * 46 + 29;
           //console.log(OffsetLoop);
-          var s = JSON.stringify(MessageAnalysis(RecvData, OffsetLoop), null, ' ');
+          let s = JSON.stringify(MessageAnalysis(RecvData, OffsetLoop), null, ' ');
           console.log('解析数据:' + s);
           logger.debug('解析数据:' + s);
         }
         //console.log("校验正确!");
         /* 发送数据 */
-        var SendMessage = MessagePKG(RecvData);
+        let SendMessage = MessagePKG(RecvData);
         socket.write(SendMessage, function () {
-          var Message = "---------发送应答报文:" + SendMessage.toString('hex');
+          let Message = "---------发送应答报文:" + SendMessage.toString('hex');
           logger.debug(Message);
           console.log(Message);
         });
 
       }
     } else {
-      //var SendMessage = CRCCalculate();
+      //let SendMessage = CRCCalculate();
       if (LogOnOff == true) {
-        var Message = "接收到SUM校验错误的报文: " + RecvData.toString('hex');
+        let Message = "接收到SUM校验错误的报文: " + RecvData.toString('hex');
         logger.debug(Message);
         console.log(Message);
       }
@@ -96,13 +96,13 @@ function CRCCheckOut(RecvData) {
   }
   //console.log(RecvData);
   //计算得到的sum用于校验
-  var CalSum = 0;
+  let CalSum = 0;
   //接收buf
-  var buf = Buffer.from(RecvData);
+  let buf = Buffer.from(RecvData);
   //接收报文中的累加和校验值
-  var RecvSum = buf[buf.length - 3];
+  let RecvSum = buf[buf.length - 3];
   //console.log('收到字节长度: ' + buf.length);
-  for (var i = 2; i < (buf.length - 3); i++) {
+  for (let i = 2; i < (buf.length - 3); i++) {
     CalSum = CalSum + buf[i];
   }
   CalSum = CalSum & 255;
@@ -118,21 +118,21 @@ function CRCCheckOut(RecvData) {
 
 function MessagePKG(RecvData) {
   //接收buf
-  const MessageBody = Buffer.from(RecvData);
-  const Message = Buffer.alloc(26);
+  let MessageBody = Buffer.from(RecvData);
+  let Message = Buffer.alloc(26);
   MessageBody.copy(Message, 0, 0, 26);
   Message[24] = [0x00];
   //console.log('1=' + Message.toString('hex'));
-  const MessageControl = Buffer.from([0x03]);
+  let MessageControl = Buffer.from([0x03]);
   //console.log('2=' + MessageControl.toString('hex'));
-  const SendMessage = Buffer.concat([Message, MessageControl])
+  let SendMessage = Buffer.concat([Message, MessageControl])
   //console.log('3=' + SendMessage.toString('hex'));
-  const MessageCRC = SumCRC(SendMessage);
+  let MessageCRC = SumCRC(SendMessage);
 
   //console.log('4=' + MessageCRC.toString('hex'));
-  const MessageEnd = Buffer.from([0x23, 0x23]);
+  let MessageEnd = Buffer.from([0x23, 0x23]);
   //console.log('5=' + MessageEnd.toString('hex'));
-  const pubMessage = Buffer.concat([Message, MessageControl, MessageCRC, MessageEnd])
+  let pubMessage = Buffer.concat([Message, MessageControl, MessageCRC, MessageEnd])
   //console.log('5=' + pubMessage.toString('hex'));
   // console.log(buf2);
   // console.log(buf3);
@@ -142,15 +142,15 @@ function MessagePKG(RecvData) {
 function SumCRC(SumData) {
   //console.log(RecvData);
   //计算得到的sum用于校验
-  var CalSum = 0;
+  let CalSum = 0;
   //接收buf
-  var buf = Buffer.from(SumData);
+  let buf = Buffer.from(SumData);
   //console.log('收到用于校验字节长度: ' + buf.length);
-  for (var i = 2; i < (buf.length); i++) {
+  for (let i = 2; i < (buf.length); i++) {
     CalSum = CalSum + buf[i];
   }
   CalSum = CalSum & 255;
-  var send = Buffer.from([CalSum])
+  let send = Buffer.from([CalSum])
   return send;
 
 }
@@ -183,26 +183,31 @@ function MessageAnalysis(RecvData, LoopNum) {
   //信息对象数目1字节
   let C2Code = Buffer.from([RecvData[28]])
 
+  let C8Code = []
+  let C8CodeCN = []
   if (C1Code[0] == [0x15]) {
     //上传用户信息传输装置运行状态
-    var C8Code = Buffer.from([RecvData[29]])
-    var C8CodeCN = Buffer.from(SystemTypeClass(C8Code[0]))
+    C8Code = Buffer.from([RecvData[29]])
+    C8CodeCN = Buffer.from(SystemTypeClass(C8Code[0]))
 
   }
 
   if (C1Code[0] == [0x1c]) {
     //0x1c=28=上传用户信息装置系统时间
     let CDataTime = "20" + RecvData[34].toString(10) + "年" + RecvData[33].toString(10) + "月" + RecvData[32].toString(10) + "日" + RecvData[31].toString(10) + "时" + RecvData[30].toString(10) + "分" + RecvData[29].toString(10) + "秒"
-    var C3Code = Buffer.from(CDataTime)
+    let C3Code = Buffer.from(CDataTime)
   }
+
+  let C7CodeCN = [];
+  let C9Code = [];
   if (C1Code[0] == [0x02]) {
     //0x02=上传建筑消防设施部件运行状态
 
-    var C4Code = Buffer.from([RecvData[LoopNum]])
-    var C4CodeCN = SystemType(C4Code[0])
-    var C5Code = Buffer.from([RecvData[LoopNum + 1]])
-    var C6Code = Buffer.from([RecvData[LoopNum + 2]])
-    var C6CodeCN = PartType(C6Code[0])
+    let C4Code = Buffer.from([RecvData[LoopNum]])
+    let C4CodeCN = SystemType(C4Code[0])
+    let C5Code = Buffer.from([RecvData[LoopNum + 1]])
+    let C6Code = Buffer.from([RecvData[LoopNum + 2]])
+    let C6CodeCN = PartType(C6Code[0])
     let ParAdd = RecvData[LoopNum + 5].toString(10) + RecvData[LoopNum + 3].toString(10)
     if (ParAdd.length < 6) {
       ParAdd = '0' + ParAdd;
@@ -216,10 +221,10 @@ function MessageAnalysis(RecvData, LoopNum) {
     if (ParAdd.length < 3) {
       ParAdd = '000' + ParAdd;
     }
-    var C7CodeCN = Buffer.from(ParAdd)
-    var C8Code = Buffer.from([RecvData[LoopNum + 7]])
-    var C8CodeCN = Buffer.from(PartTypeClass(C8Code[0]))
-    var C9Code = Buffer.alloc(30);
+    C7CodeCN = Buffer.from(ParAdd)
+    C8Code = Buffer.from([RecvData[LoopNum + 7]])
+    C8CodeCN = Buffer.from(PartTypeClass(C8Code[0]))
+    C9Code = Buffer.alloc(30);
     RecvData.copy(C9Code, 0, LoopNum + 9, LoopNum + 39);
   }
   //校验和1字节
@@ -227,7 +232,7 @@ function MessageAnalysis(RecvData, LoopNum) {
   //结束符2字节
   let FCode = Buffer.from([RecvData[RecvData.length - 2], RecvData[RecvData.length - 1]])
   //信息对象建立
-  var RecvMessage = {};
+  let RecvMessage = {};
   RecvMessage.启动符 = ACode.toString('utf8');
   RecvMessage.业务流水号 = B1Code.toString('hex');
   RecvMessage.协议版本号 = B2Code.toString('hex');
@@ -238,7 +243,6 @@ function MessageAnalysis(RecvData, LoopNum) {
   RecvMessage.命令控制字 = B7Code.toString('hex');
   RecvMessage.类型标志 = C1CodeCN;
   RecvMessage.信息对象数目 = C2Code.toString('hex');
-
   if (C1Code[0] == [0x15]) {
     RecvMessage.信息内容 = C8CodeCN.toString('utf8');
   }
