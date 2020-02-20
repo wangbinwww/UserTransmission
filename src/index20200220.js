@@ -2,9 +2,328 @@
     UT:三山用户信息传输装置；
     适用于三山消防系统用传装置数据解析
 */
+/* 引入net模块 */
 
+var AlmAreasList = [{
+    "id": "1",
+    "MergeUserCode": "21006000648",
+    "Areas": "B7库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "2",
+    "MergeUserCode": "21006000715",
+    "Areas": "B7库01层02分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "3",
+    "MergeUserCode": "21006000780",
+    "Areas": "B7库01层03分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "4",
+    "MergeUserCode": "21006000836",
+    "Areas": "B7库01层04分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "5",
+    "MergeUserCode": "21006000899",
+    "Areas": "B8库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "6",
+    "MergeUserCode": "21006000932",
+    "Areas": "B8库01层02分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "7",
+    "MergeUserCode": "21006000972",
+    "Areas": "B8库01层03分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "8",
+    "MergeUserCode": "21006000343",
+    "Areas": "B5库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "9",
+    "MergeUserCode": "21006000379",
+    "Areas": "B5库01层02分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "10",
+    "MergeUserCode": "21006000413",
+    "Areas": "B5库01层03分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "11",
+    "MergeUserCode": "21006000447",
+    "Areas": "B5库01层04分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "12",
+    "MergeUserCode": "21006000485",
+    "Areas": "B6库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "13",
+    "MergeUserCode": "21006000013",
+    "Areas": "A1库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "14",
+    "MergeUserCode": "21006000042",
+    "Areas": "A1库02层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "15",
+    "MergeUserCode": "21006001160",
+    "Areas": "一期消防泵房 ",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "16",
+    "MergeUserCode": "21006000702",
+    "Areas": "B7库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "17",
+    "MergeUserCode": "21006000883",
+    "Areas": "B7库01层04分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "18",
+    "MergeUserCode": "21006000918",
+    "Areas": "B8库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "19",
+    "MergeUserCode": "21006000958",
+    "Areas": "B8库01层02分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "20",
+    "MergeUserCode": "21006001000",
+    "Areas": "B8库01层03分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "21",
+    "MergeUserCode": "21006000364",
+    "Areas": "B5库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "22",
+    "MergeUserCode": "21006000399",
+    "Areas": "B5库01层02分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "23",
+    "MergeUserCode": "21006000433",
+    "Areas": "B5库01层03分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "24",
+    "MergeUserCode": "21006000467",
+    "Areas": "B5库01层04分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "25",
+    "MergeUserCode": "21006000088",
+    "Areas": "A2库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "26",
+    "MergeUserCode": "21006000114",
+    "Areas": "A2库02层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "27",
+    "MergeUserCode": "21006000031",
+    "Areas": "A1库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "28",
+    "MergeUserCode": "21006000057",
+    "Areas": "A1库02层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "29",
+    "MergeUserCode": "21006001161",
+    "Areas": "消防泵房",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "30",
+    "MergeUserCode": "21006001148",
+    "Areas": "B7库01层04分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "31",
+    "MergeUserCode": "21006001157",
+    "Areas": "B7库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "32",
+    "MergeUserCode": "21006001158",
+    "Areas": "B7库01层04分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "33",
+    "MergeUserCode": "21006001153",
+    "Areas": "B5库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "34",
+    "MergeUserCode": "21006001154",
+    "Areas": "B5库01层02分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "35",
+    "MergeUserCode": "21006001155",
+    "Areas": "B5库01层03分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "36",
+    "MergeUserCode": "21006001156",
+    "Areas": "B5库01层04分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "37",
+    "MergeUserCode": "21006001149",
+    "Areas": "A1库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "38",
+    "MergeUserCode": "21006001150",
+    "Areas": "A1库02层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "39",
+    "MergeUserCode": "21006001151",
+    "Areas": "A2库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "40",
+    "MergeUserCode": "21006001152",
+    "Areas": "A2库02层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "41",
+    "MergeUserCode": "21006000654",
+    "Areas": "B7库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "42",
+    "MergeUserCode": "21006000721",
+    "Areas": "B7库01层02分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "43",
+    "MergeUserCode": "21006000786",
+    "Areas": "B7库01层03分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "44",
+    "MergeUserCode": "21006000842",
+    "Areas": "B7库01层04分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "45",
+    "MergeUserCode": "21006000906",
+    "Areas": "B8库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "46",
+    "MergeUserCode": "21006000938",
+    "Areas": "B8库01层02分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "47",
+    "MergeUserCode": "21006000978",
+    "Areas": "B8库01层03分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "48",
+    "MergeUserCode": "21006000491",
+    "Areas": "B6库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "49",
+    "MergeUserCode": "21006001159",
+    "Areas": "消防泵房",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "50",
+    "MergeUserCode": "21006000019",
+    "Areas": "A1库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "51",
+    "MergeUserCode": "21006000048",
+    "Areas": "A1库02层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "52",
+    "MergeUserCode": "21006000076",
+    "Areas": "A2库01层01分区",
+    "MergeTypeNum": "0"
+  },
+  {
+    "id": "53",
+    "MergeUserCode": "21006000105",
+    "Areas": "A2库02层01分区",
+    "MergeTypeNum": "0"
+  }
+]
 
-/* 引入net log4js path模块 */
 const net = require('net');
 const log4js = require('log4js');
 const path = require('path');
@@ -15,17 +334,18 @@ const jserver = jsonServer.create();
 const router = jsonServer.router(path.resolve(__dirname, '../src/db3001.json'));
 const middlewares = jsonServer.defaults({
   watch: true,
-  //delay: 50,
+  delay: 50,
   static: path.resolve(__dirname, '../src/static/'),
+  //quiet: true,
 });
 jserver.use(middlewares);
 jserver.use(router);
-jserver.use(jsonServer.rewriter({
-  '/api/*': '/$1',
-  '/blog/:resource/:id/show': '/:resource/:id'
-}))
-jserver.listen(3002, () => {
-  console.log('JSON Server is running at http://127.0.0.1:3002')
+// jserver.use(jsonServer.rewriter({
+//   '/api/*': '/$1',
+//   '/blog/:resource/:id/show': '/:resource/:id'
+// }))
+jserver.listen(3001, () => {
+  console.log('JSON Server is running at http://127.0.0.1:3001')
 })
 
 let LogOnOff = true;
@@ -37,7 +357,7 @@ log4js.configure({
       filename: "logs\\log",
       //windows
       //filename: path.resolve(__dirname, '../logs/log'),
-      //日志名称例子
+
       //pattern: 'yyyy-MM-dd hh-mm.log'
       pattern: "yyyy-MM-dd.log"
     }
@@ -64,28 +384,29 @@ let server = net.createServer(function (socket) {
     let SumCRC = CRCCheckOut(RecvData);
     //console.log(num++ + " Recv:" + RecvData.toString());
     if (SumCRC == true) {
+      //console.log(SendMessage);
       if (LogOnOff == true) {
         let Message = "接收到SUM校验正确报文:" + RecvData.toString('hex');
         logger.debug(Message);
-      }
-      console.log(Message);
-      let C2CodeLoop = Buffer.from([RecvData[28]])
-      for (let i = 0; i < C2CodeLoop[0]; i++) {
-        let OffsetLoop = i * 46 + 29;
-        //console.log(OffsetLoop);
-        let s = JSON.stringify(MessageAnalysis(RecvData, OffsetLoop), null, ' ');
-        console.log('解析数据:' + s);
-        logger.debug('解析数据:' + s);
-        //这里更新数据库状态
-      }
-      /* 发送数据 */
-      let SendMessage = MessagePKG(RecvData);
-      socket.write(SendMessage, function () {
-        let Message = "---------发送应答报文:" + SendMessage.toString('hex');
-        logger.debug(Message);
         console.log(Message);
-      });
-
+        let C2CodeLoop = Buffer.from([RecvData[28]])
+        for (let i = 0; i < C2CodeLoop[0]; i++) {
+          let OffsetLoop = i * 46 + 29;
+          //console.log(OffsetLoop);
+          let s = JSON.stringify(MessageAnalysis(RecvData, OffsetLoop), null, ' ');
+          console.log('解析数据:' + s);
+          logger.debug('解析数据:' + s);
+          //这里更新数据库状态
+        }
+        //console.log("校验正确!");
+        /* 发送数据 */
+        let SendMessage = MessagePKG(RecvData);
+        socket.write(SendMessage, function () {
+          let Message = "---------发送应答报文:" + SendMessage.toString('hex');
+          logger.debug(Message);
+          console.log(Message);
+        });
+      }
     } else {
       //let SendMessage = CRCCalculate();
       if (LogOnOff == true) {
@@ -93,6 +414,8 @@ let server = net.createServer(function (socket) {
         logger.debug(Message);
         console.log(Message);
       }
+      /* 发送数据 */
+      //socket.write(SendMessage, function () {});
     }
   });
   socket.on("close", function () {
@@ -117,6 +440,7 @@ function CRCCheckOut(RecvData) {
   if (RecvData.length < 17) {
     return false;
   }
+  //console.log(RecvData);
   //计算得到的sum用于校验
   let CalSum = 0;
   //接收buf
@@ -128,6 +452,9 @@ function CRCCheckOut(RecvData) {
     CalSum = CalSum + buf[i];
   }
   CalSum = CalSum & 255;
+  //验证输出
+  //console.log('收到报文校验码: ' + RecvSum.toString(16));
+  //console.log('计算得到校验码: ' + CalSum.toString(16));
   if (CalSum.toString(16) == RecvSum.toString(16)) {
     return true
   } else {
@@ -152,6 +479,9 @@ function MessagePKG(RecvData) {
   let MessageEnd = Buffer.from([0x23, 0x23]);
   //console.log('5=' + MessageEnd.toString('hex'));
   let pubMessage = Buffer.concat([Message, MessageControl, MessageCRC, MessageEnd])
+  //console.log('5=' + pubMessage.toString('hex'));
+  // console.log(buf2);
+  // console.log(buf3);
   return pubMessage //SendMessage
 }
 //计算累加和校验
@@ -178,7 +508,7 @@ function MessageAnalysis(RecvData, LoopNum) {
   let ACode = Buffer.from([RecvData[0], RecvData[1]])
   //控制单元
   //业务流水号 2 字节
-  let B1Code = Buffer.from([RecvData[3], RecvData[2]])
+  let B1Code = Buffer.from([RecvData[2], RecvData[3]])
   //协议版本号
   let B2Code = Buffer.from([RecvData[4], RecvData[5]])
   //时间标签6字节
@@ -205,6 +535,7 @@ function MessageAnalysis(RecvData, LoopNum) {
     //上传用户信息传输装置运行状态
     C8Code = Buffer.from([RecvData[29]])
     C8CodeCN = Buffer.from(SystemTypeClass(C8Code[0]))
+
   }
 
   var CDataTime = '';
@@ -217,40 +548,37 @@ function MessageAnalysis(RecvData, LoopNum) {
 
   var C7CodeCN = [];
   var C9Code = [];
-  var C4Code = [];
-  var C4CodeCN = '';
-  var C5Code = [];
-  var C6Code = [];
-  var C6CodeCN = '';
 
   if (C1Code[0] == [0x02]) {
     //0x02=上传建筑消防设施部件运行状态
 
-    C4Code = Buffer.from([RecvData[LoopNum]])
-    C4CodeCN = SystemType(C4Code[0])
-    C5Code = Buffer.from([RecvData[LoopNum + 1]])
-    C6Code = Buffer.from([RecvData[LoopNum + 2]])
-    C6CodeCN = PartType(C6Code[0])
+    var C4Code = Buffer.from([RecvData[LoopNum]])
+    var C4CodeCN = SystemType(C4Code[0])
+    var C5Code = Buffer.from([RecvData[LoopNum + 1]])
+    var C6Code = Buffer.from([RecvData[LoopNum + 2]])
+    var C6CodeCN = PartType(C6Code[0])
 
-    let ParAddH = RecvData[LoopNum + 5].toString(10);
+    var ParAddH = RecvData[LoopNum + 5].toString(10);
     if (ParAddH.length < 3) {
       ParAddH = '0' + ParAddH;
     }
     if (ParAddH.length < 2) {
       ParAddH = '0' + ParAddH;
     }
-    let ParAddL = RecvData[LoopNum + 3].toString(10);
+    var ParAddL = RecvData[LoopNum + 3].toString(10);
     if (ParAddL.length < 3) {
       ParAddL = '0' + ParAddL;
     }
     if (ParAddL.length < 2) {
       ParAddL = '0' + ParAddL;
     }
-    let ParAdd = ParAddH + ParAddL
+    var ParAdd = ParAddH + ParAddL
+
+
 
     C7CodeCN = Buffer.from(ParAdd)
     C8Code = Buffer.from([RecvData[LoopNum + 7]])
-    C8CodeCN = Buffer.from(DevPartTypeClass(C8Code[0]))
+    C8CodeCN = Buffer.from(PartTypeClass(C8Code[0]))
     C9Code = Buffer.alloc(30);
     RecvData.copy(C9Code, 0, LoopNum + 9, LoopNum + 39);
   }
@@ -281,13 +609,15 @@ function MessageAnalysis(RecvData, LoopNum) {
     RecvMessage.系统地址 = C5Code.toString('hex');
     RecvMessage.部件类型 = C6CodeCN.toString('utf8');
     RecvMessage.部件地址 = C7CodeCN.toString('utf8');
-    RecvMessage.部件状态code = C8Code.toString('hex');
     RecvMessage.部件状态 = C8CodeCN.toString('utf8');
     RecvMessage.部件说明 = C9Code.toString('hex');
   };
 
   RecvMessage.校验和 = ECode.toString('hex');
   RecvMessage.结束符 = FCode.toString('utf8');
+  //console.log('5=' + pubMessage.toString('hex'));
+  // console.log(buf2);
+  // console.log(buf3);
   return RecvMessage //
 }
 //表4 系统类型定义表
@@ -450,7 +780,7 @@ function PartType(num) {
   return (Type[num])
 }
 
-//表3 类型标志定义表
+//表3 标志类型定义表
 function MarkType(num) {
   let Type = [
     '预留',
@@ -549,57 +879,8 @@ function MarkType(num) {
   return (Type[num])
 }
 
-
-//图 6 建筑消防设施系统状态数据结构
-function DevSystemTypeClass(num) {
-
-  if (num == 01) {
-    return '正常运行状态';
-  }
-  if (num == 02) {
-    return '火警';
-  }
-  if (num == 04) {
-    return '故障';
-  }
-  if (num == 08) {
-    return '屏蔽';
-  }
-  if (num == 16) {
-    return '监管';
-  }
-  if (num == 32) {
-    return '启动（开启）';
-  }
-  if (num == 64) {
-    return '反馈';
-  }
-  if (num == 128) {
-    return '延时状态';
-  }
-  if (num == 256) {
-    return '主电故障';
-  }
-  if (num == 512) {
-    return '备电故障';
-  }
-  if (num == 1024) {
-    return '总线故障';
-  }
-  if (num == 2048) {
-    return '手动状态';
-  }
-  if (num == 4096) {
-    return '配置改变';
-  }
-  if (num == 8192) {
-    return '复位';
-  }
-  return '无';
-}
-
-//图7 建筑消防设施施部件状态数据结构
-function DevPartTypeClass(num) {
+//图7 建筑消防设施部件状态数据结构
+function PartTypeClass(num) {
 
   if (num == 01) {
     return '正常运行状态';
@@ -631,34 +912,6 @@ function DevPartTypeClass(num) {
   return '无';
 }
 
-//图 9 建筑消防设施操作信息数据结构
-function DevControlClass(num) {
-
-  if (num == 01) {
-    return '复位';
-  }
-  if (num == 02) {
-    return '消音';
-  }
-  if (num == 04) {
-    return '手动报警';
-  }
-  if (num == 08) {
-    return '警情消除';
-  }
-  if (num == 16) {
-    return '自检';
-  }
-  if (num == 32) {
-    return '确认';
-  }
-  if (num == 64) {
-    return '测试';
-  }
-  return '无';
-}
-
-//图 13 用户信息传输装置运行状态结构
 function SystemTypeClass(num) {
 
   if (num == 01) {
@@ -681,34 +934,6 @@ function SystemTypeClass(num) {
   }
   if (num == 64) {
     return '监测链接线路故障';
-  }
-  return '无';
-}
-
-//图 14 用户信息传输装置操作信息数据结构
-
-function SystemControlClass(num) {
-
-  if (num == 01) {
-    return '复位';
-  }
-  if (num == 02) {
-    return '消音';
-  }
-  if (num == 04) {
-    return '手动报警';
-  }
-  if (num == 08) {
-    return '警情消除';
-  }
-  if (num == 16) {
-    return '自检';
-  }
-  if (num == 32) {
-    return '查岗应答';
-  }
-  if (num == 64) {
-    return '测试';
   }
   return '无';
 }
