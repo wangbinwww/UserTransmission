@@ -1,7 +1,7 @@
 {
   "Reset": [{
     "id": 1,
-    "result": 0
+    "RestAll": 1
   }],
   "Dev": [{
       "id": "1",
@@ -25,7 +25,7 @@
       "id": "4",
       "MergeUserCode": "21006000836",
       "Areas": "B7库01层04分区",
-      "MergeTypeNum": "0"
+      "MergeTypeNum": "5"
     },
     {
       "id": "5",
@@ -139,7 +139,7 @@
       "id": "23",
       "MergeUserCode": "21006000433",
       "Areas": "B5库01层03分区",
-      "MergeTypeNum": "0"
+      "MergeTypeNum": "3"
     },
     {
       "id": "24",
@@ -185,141 +185,147 @@
     },
     {
       "id": "31",
+      "MergeUserCode": "21006001148",
+      "Areas": "消防泵房",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "32",
       "MergeUserCode": "21006001157",
       "Areas": "B7库01层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "32",
+      "id": "33",
       "MergeUserCode": "21006001158",
       "Areas": "B7库01层04分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "33",
+      "id": "34",
       "MergeUserCode": "21006001153",
       "Areas": "B5库01层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "34",
+      "id": "35",
       "MergeUserCode": "21006001154",
       "Areas": "B5库01层02分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "35",
+      "id": "36",
       "MergeUserCode": "21006001155",
       "Areas": "B5库01层03分区",
-      "MergeTypeNum": "0"
+      "MergeTypeNum": "2"
     },
     {
-      "id": "36",
+      "id": "37",
       "MergeUserCode": "21006001156",
       "Areas": "B5库01层04分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "37",
+      "id": "38",
       "MergeUserCode": "21006001149",
       "Areas": "A1库01层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "38",
+      "id": "39",
       "MergeUserCode": "21006001150",
       "Areas": "A1库02层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "39",
+      "id": "40",
       "MergeUserCode": "21006001151",
       "Areas": "A2库01层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "40",
+      "id": "41",
       "MergeUserCode": "21006001152",
       "Areas": "A2库02层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "41",
+      "id": "42",
       "MergeUserCode": "21006000654",
       "Areas": "B7库01层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "42",
+      "id": "43",
       "MergeUserCode": "21006000721",
       "Areas": "B7库01层02分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "43",
+      "id": "44",
       "MergeUserCode": "21006000786",
       "Areas": "B7库01层03分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "44",
+      "id": "45",
       "MergeUserCode": "21006000842",
       "Areas": "B7库01层04分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "45",
+      "id": "46",
       "MergeUserCode": "21006000906",
       "Areas": "B8库01层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "46",
+      "id": "47",
       "MergeUserCode": "21006000938",
       "Areas": "B8库01层02分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "47",
+      "id": "48",
       "MergeUserCode": "21006000978",
       "Areas": "B8库01层03分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "48",
+      "id": "49",
       "MergeUserCode": "21006000491",
       "Areas": "B6库01层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "49",
+      "id": "50",
       "MergeUserCode": "21006001159",
       "Areas": "消防泵房",
       "MergeTypeNum": "0"
     },
     {
-      "id": "50",
+      "id": "51",
       "MergeUserCode": "21006000019",
       "Areas": "A1库01层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "51",
+      "id": "52",
       "MergeUserCode": "21006000048",
       "Areas": "A1库02层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "52",
+      "id": "53",
       "MergeUserCode": "21006000076",
       "Areas": "A2库01层01分区",
       "MergeTypeNum": "0"
     },
     {
-      "id": "53",
+      "id": "54",
       "MergeUserCode": "21006000105",
       "Areas": "A2库02层01分区",
-      "MergeTypeNum": "0"
+      "MergeTypeNum": "8"
     }
   ]
 }
