@@ -1,0 +1,334 @@
+{
+  "Reset": [
+    {
+      "id": 1,
+      "RestAll": 1
+    }
+  ],
+  "Dev": [
+    {
+      "id": "1",
+      "MergeUserCode": "21006000648",
+      "Areas": "B7库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "2",
+      "MergeUserCode": "21006000715",
+      "Areas": "B7库01层02分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "3",
+      "MergeUserCode": "21006000780",
+      "Areas": "B7库01层03分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "4",
+      "MergeUserCode": "21006000836",
+      "Areas": "B7库01层04分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "5",
+      "MergeUserCode": "21006000899",
+      "Areas": "B8库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "6",
+      "MergeUserCode": "21006000932",
+      "Areas": "B8库01层02分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "7",
+      "MergeUserCode": "21006000972",
+      "Areas": "B8库01层03分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "8",
+      "MergeUserCode": "21006000343",
+      "Areas": "B5库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "9",
+      "MergeUserCode": "21006000379",
+      "Areas": "B5库01层02分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "10",
+      "MergeUserCode": "21006000413",
+      "Areas": "B5库01层03分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "11",
+      "MergeUserCode": "21006000447",
+      "Areas": "B5库01层04分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "12",
+      "MergeUserCode": "21006000485",
+      "Areas": "B6库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "13",
+      "MergeUserCode": "21006000013",
+      "Areas": "A1库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "14",
+      "MergeUserCode": "21006000042",
+      "Areas": "A1库02层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "15",
+      "MergeUserCode": "21006001160",
+      "Areas": "一期消防泵房 ",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "16",
+      "MergeUserCode": "21006000702",
+      "Areas": "B7库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "17",
+      "MergeUserCode": "21006000883",
+      "Areas": "B7库01层04分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "18",
+      "MergeUserCode": "21006000918",
+      "Areas": "B8库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "19",
+      "MergeUserCode": "21006000958",
+      "Areas": "B8库01层02分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "20",
+      "MergeUserCode": "21006001000",
+      "Areas": "B8库01层03分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "21",
+      "MergeUserCode": "21006000364",
+      "Areas": "B5库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "22",
+      "MergeUserCode": "21006000399",
+      "Areas": "B5库01层02分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "23",
+      "MergeUserCode": "21006000433",
+      "Areas": "B5库01层03分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "24",
+      "MergeUserCode": "21006000467",
+      "Areas": "B5库01层04分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "25",
+      "MergeUserCode": "21006000088",
+      "Areas": "A2库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "26",
+      "MergeUserCode": "21006000114",
+      "Areas": "A2库02层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "27",
+      "MergeUserCode": "21006000031",
+      "Areas": "A1库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "28",
+      "MergeUserCode": "21006000057",
+      "Areas": "A1库02层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "29",
+      "MergeUserCode": "21006001161",
+      "Areas": "消防泵房",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "30",
+      "MergeUserCode": "21006001148",
+      "Areas": "B7库01层04分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "31",
+      "MergeUserCode": "21006001148",
+      "Areas": "消防泵房",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "32",
+      "MergeUserCode": "21006001157",
+      "Areas": "B7库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "33",
+      "MergeUserCode": "21006001158",
+      "Areas": "B7库01层04分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "34",
+      "MergeUserCode": "21006001153",
+      "Areas": "B5库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "35",
+      "MergeUserCode": "21006001154",
+      "Areas": "B5库01层02分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "36",
+      "MergeUserCode": "21006001155",
+      "Areas": "B5库01层03分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "37",
+      "MergeUserCode": "21006001156",
+      "Areas": "B5库01层04分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "38",
+      "MergeUserCode": "21006001149",
+      "Areas": "A1库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "39",
+      "MergeUserCode": "21006001150",
+      "Areas": "A1库02层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "40",
+      "MergeUserCode": "21006001151",
+      "Areas": "A2库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "41",
+      "MergeUserCode": "21006001152",
+      "Areas": "A2库02层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "42",
+      "MergeUserCode": "21006000654",
+      "Areas": "B7库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "43",
+      "MergeUserCode": "21006000721",
+      "Areas": "B7库01层02分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "44",
+      "MergeUserCode": "21006000786",
+      "Areas": "B7库01层03分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "45",
+      "MergeUserCode": "21006000842",
+      "Areas": "B7库01层04分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "46",
+      "MergeUserCode": "21006000906",
+      "Areas": "B8库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "47",
+      "MergeUserCode": "21006000938",
+      "Areas": "B8库01层02分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "48",
+      "MergeUserCode": "21006000978",
+      "Areas": "B8库01层03分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "49",
+      "MergeUserCode": "21006000491",
+      "Areas": "B6库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "50",
+      "MergeUserCode": "21006001159",
+      "Areas": "消防泵房",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "51",
+      "MergeUserCode": "21006000019",
+      "Areas": "A1库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "52",
+      "MergeUserCode": "21006000048",
+      "Areas": "A1库02层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "53",
+      "MergeUserCode": "21006000076",
+      "Areas": "A2库01层01分区",
+      "MergeTypeNum": "0"
+    },
+    {
+      "id": "54",
+      "MergeUserCode": "21006000105",
+      "Areas": "A2库02层01分区",
+      "MergeTypeNum": "8"
+    }
+  ]
+}

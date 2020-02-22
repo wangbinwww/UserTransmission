@@ -1,9 +1,12 @@
 {
-  "Reset": [{
-    "id": 1,
-    "RestAll": 1
-  }],
-  "Dev": [{
+  "Reset": [
+    {
+      "id": 1,
+      "RestAll": 1
+    }
+  ],
+  "Dev": [
+    {
       "id": "1",
       "MergeUserCode": "21006000648",
       "Areas": "B7库01层01分区",
@@ -25,7 +28,7 @@
       "id": "4",
       "MergeUserCode": "21006000836",
       "Areas": "B7库01层04分区",
-      "MergeTypeNum": "5"
+      "MergeTypeNum": "0"
     },
     {
       "id": "5",
@@ -139,7 +142,7 @@
       "id": "23",
       "MergeUserCode": "21006000433",
       "Areas": "B5库01层03分区",
-      "MergeTypeNum": "3"
+      "MergeTypeNum": "0"
     },
     {
       "id": "24",
@@ -217,7 +220,7 @@
       "id": "36",
       "MergeUserCode": "21006001155",
       "Areas": "B5库01层03分区",
-      "MergeTypeNum": "2"
+      "MergeTypeNum": "0"
     },
     {
       "id": "37",
