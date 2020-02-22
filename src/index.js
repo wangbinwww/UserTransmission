@@ -3008,7 +3008,7 @@ jserver.listen(3002, () => {
 
 
 var onRest = 0;
-//RestAlm();
+RestAlm();
 const RestTime = 60 * 1000
 setInterval(function () { //定时器
   //RestAlm();
